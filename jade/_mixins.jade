@@ -1,0 +1,6 @@
+mixin link(href, name)
+	a(href=href,target='_blank',style={'color':'#{color}','font-size':'#{fsize}','font-family':'#{ffamily}','-webkit-text-size-adjust':'none'})= name
+mixin p(name)
+	p(style={'color':'#{color}','font-size':'#{fsize}','font-family':'#{ffamily}','-webkit-text-size-adjust':'none','line-height':'#{lineh}'})= name
+mixin img(name)
+	img(style={'display':'block'},border='0',width='100',src='name',alt='')
