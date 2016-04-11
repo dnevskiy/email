@@ -4,3 +4,15 @@ mixin p(name)
 	p(style={'color':'#{color}','font-size':'#{fsize}','font-family':'#{ffamily}','-webkit-text-size-adjust':'none','line-height':'#{lineh}'})= name
 mixin img(name)
 	img(style={'display':'block'},border='0',width='100',src='name',alt='')
+mixin tel(name)
+	img(style={'color':'sky'},href='tel:name',value='name',target="_blank")= name
+mixin mail(name)
+	img(style={'color':'sky'},href='name',target="_blank")= name
+mixin center(name)
+  table(style={'margin':'0','padding':'0','width':'100%'})&attributes(attributes)
+    tr
+      td(height='100%')
+      	center(style={'max-width':'600px','width':'100%'})
+mixin span(name)
+	span(style={'display':'inline-block','width':'300px'})
+	span(style={'display':'inline-block','width':'300px'})

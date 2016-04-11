@@ -1,84 +1,18 @@
+//- https://habrahabr.ru/post/252279/
 body
-	table(style={'margin':'0','padding':'0','width':'600px','line-height':'#{lineh}'})&attributes(attributes)
+  +center
+          table(style={'margin':'0','padding':'0','width':'100%','line-height':'#{lineh}'})&attributes(attributes)
+            tr
+              td
+                +span('1')
 +link('/foo', 'link')
 +p('Lorem ipsum')
 +img('/foo')
-//
-	<td style="padding: 10px;"></td>
-	<a href="tel:0­ 8­00 3­03 5­05" value="+380800303505" target="_blank" style="">0­ 8­00 3­03 5­05</a>
-	<a href="mailto:exemple@gmail.com" target="_blank" style="">exemple@gmail.com</a>
-	Для того, чтобы фон вне письма был на всю ширину и высоту, необходимо главной таблице добавить width=«100%» и для td прописать height=«100%». Пример:
-	<table bgcolor="#000000" border="0" cellpadding="0" cellspacing="0" style="margin:0; padding:0" width="100%">
-  <tr>
-    <td height="100%">
-
-//font-family: Arial, Helvetica, sans-serif;
-	font-family: 'Arial Black', Gadget, sans-serif;
-	font-family: Georgia, serif;
-	font-family: 'MS Sans Serif', Geneva, sans-serif;
-	font-family: 'MS Serif', 'New York', sans-serif;
-	font-family: Tahoma, Geneva, sans-serif;
-	font-family: 'Times New Roman', Times, serif;
-	font-family: 'Trebuchet MS', Helvetica, sans-serif;
-	font-family: Verdana, Geneva, sans-serif;
-
-	//Адаптивная верстка
-
-На данный момент существует огромное количество методов верстки адаптивных писем, но мы остановимся на одном из них.
-
-Суть данного метода заключается в следующем: при изменении ширины экрана устройства размер нашего письмо автоматически подстраивается. Внутренние блоки, которые располагаются горизонтально, при нехватки места прыгают друг под друга, таким образом все элементы письма, которым не хватает, будут уходить вниз.
-
-Система подстраивания письма под размер экрана реализована с помощью стилей и тега center, который находится сразу после основной таблицы письма. Получается, что весь контент оборачивается тегом center:
-
-<table border="0" cellpadding="0" cellspacing="0" style="margin:0; padding:0">
-  <tr>
-    <td>
-      <center style="max-width: 600px; width: 100%;">
-        контент письма
-      </center>   
-    </td>
-  </tr>
-</table>
-
-
-Если по горизонтали находится больше одного блока и эти блоки должны стать друг под другом при изменении ширины, то их необходимо оборачивать в тег span со стилями:
-
-<span style="display:inline-block; width:260px;">
-   Контент блока
-</span>
-
-
-Общая структура разметки будет выглядеть следующим образом:
-
-<table border="0" cellpadding="0" cellspacing="0" style="margin:0; padding:0" width="100%">
-  <tr>
-    <td>
-      <center style="max-width: 600px; width: 100%;">
-
-        <table border="0" cellpadding="0" cellspacing="0" style="margin:0; padding:0" width="100%">
-  <tr>
-    <td>
-        <!-- Блок номер 1 -->
-         <span style="display:inline-block; width:300px;">
-             Контент блока
-         </span>
-        <!-- Блок номер 1 -->
-        <!-- Блок номер 2 -->
-         <span style="display:inline-block; width:300px;">
-              Контент блока
-         </span>
-        <!-- Блок номер 2 →
-
-          </td>
-        </tr>
-      </table>
-      </center>   
-    </td>
-  </tr>
-</table>
-
-
-Таким образом у нас есть общая таблица размером в 600px и внутри два блока по 300px (300px + 300px = 600px). Когда размер главной страницы становится меньше хоть на один пиксель, то блокам не хватает места и блок номер 2 становится под блоком номер 1.
++tel('+380679918388')
++mail('dmitriy.a.nevskiy@gmail.com')
+//- <td style="padding: 10px;"></td> отступы регулируем размером ячеек
+//- ,'line-height':'#{lineh}'
+	
 
 Вся наша структура не будет работать в MS Outlook десктоп, поэтому специально для него мы сделаем проверку и будем вместо тега center и span подставлять обычные таблицы:
 
@@ -87,45 +21,62 @@ body
     <td align="center">
       <center style="max-width: 600px; width: 100%;">
        <!--[if gte mso 9]>
-<table border="0" cellpadding="0" cellspacing="0" style="margin:0; padding:0"><tr><td>
-<![endif]-->
-<table border="0" cellpadding="0" cellspacing="0" style="margin:0; padding:0" width="100%">
-  <tr>
-    <td>
-        <!--[if gte mso 9]>
-        <table border="0" cellpadding="0" cellspacing="0">
-        <tr><td align="center">
-               <table border="0" cellpadding="0" cellspacing="0" width="300"     align="center"><tr><td>
-        <![endif]-->
+       <table border="0" cellpadding="0" cellspacing="0" style="margin:0; padding:0">
+        <tr>
+          <td>
+          <![endif]-->
+          <table border="0" cellpadding="0" cellspacing="0" style="margin:0; padding:0" width="100%">
+            <tr>
+              <td>
+              <!--[if gte mso 9]>
+                <table border="0" cellpadding="0" cellspacing="0">
+                  <tr>
+                    <td align="center">
+                      <table border="0" cellpadding="0" cellspacing="0" width="300"     align="center">
+                        <tr>
+                          <td>
+                          <![endif]-->
 
-        <!-- Блок номер 1 -->
-         <span style="display:inline-block; width:300px;">
-             Контент блока
-         </span>
-        <!-- Блок номер 1 -->
- <!--[if gte mso 9]>
- </td></tr></table>
- </td>
- <td align="center">
- <table border="0" cellpadding="0" cellspacing="0" align="center"><tr><td>
- <![endif]-->
-        <!-- Блок номер 2 -->
-         <span style="display:inline-block; width:300px;">
-              Контент блока
-         </span>
-        <!-- Блок номер 2 -->
-        <!--[if gte mso 9]>
-        </td></tr></table>
+                          <!-- Блок номер 1 -->
+                            <span style="display:inline-block; width:300px;">
+                                 Контент блока
+                            </span>
+                          <!-- Блок номер 1 -->
+                          
+                          <!--[if gte mso 9]>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                    <td align="center">
+                      <table border="0" cellpadding="0" cellspacing="0" align="center">
+                        <tr>
+                          <td>
+                          <![endif]-->
+                         
+                          <!-- Блок номер 2 -->
+                            <span style="display:inline-block; width:300px;">
+                                Контент блока
+                            </span>
+                          <!-- Блок номер 2 -->
+
+                          <!--[if gte mso 9]>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+                          <![endif]-->
+              </td>
+              </tr>
+            </table>
+          <!--[if gte mso 9]>
         </td>
-        </tr></table>
-        <![endif]-->
-            </td>
-        </tr>
-      </table>
-	<!--[if gte mso 9]>
-</td></tr></table>
-<![endif]-->
-     </center>   
-    </td>
-  </tr>
+      </tr>
+    </table>
+    <![endif]-->
+  </center>   
+</td>
+</tr>
 </table>
